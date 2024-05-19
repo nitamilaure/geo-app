@@ -4,6 +4,13 @@ pipeline{
      maven 'M2_HOME'
     }
     stages{
+        stage('sonar-scan1'){
+            steps{
+        withSonarQubeEnv('sonarqube'){
+    sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nitamilaure_geo-app'
+        }
+    }
+}
         stage("maven"){
             steps{
             sh 'mvn clean validate compile install test package'
@@ -13,7 +20,7 @@ pipeline{
        steps{
            sh 'curl -uadmin:AP8uTmaeNeUVnjwUoTuuLCrW99o -T \
            target/bio*.jar \
-           "http://ec2-34-229-49-242.compute-1.amazonaws.com:8081/artifactory/geolocation/geo1/bio_${BUILD_ID}.jar"'
+           "http://ec2-54-173-243-100.compute-1.amazonaws.com:8081/artifactory/geolocation/geo1/bio_${BUILD_ID}.jar"'
  }
 }
 
