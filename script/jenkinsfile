@@ -4,9 +4,9 @@ pipeline{
      maven 'M2_HOME'
     }
     stages{
-        stage('sonar-scan'){
+        stage('sonar-scan2'){
             steps{
-        withSonarQubeEnv('sonarqube'){
+        withSonarQubeEnv('sonarQube'){
     sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=nitamilaure_geo-app'
         }
     }
